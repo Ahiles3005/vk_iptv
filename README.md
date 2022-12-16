@@ -1,3 +1,8 @@
-# REACT IPTV
+# REACT VK IPTV
 
-IPTV (Internet Protocol Television) is trending nowadays and React IPTV is a simple IPTV app for Smart TVs, using React and Tizen. Tizen is an open-source platform by Samsung for creating system software and applications. React-JS-Spatial-Navigation and React-Player are used to make the spatial navigation with respect to TV remote clicks and to play the videos.
+Мини дорожная карта
+
+1) [ ] Причесать этот код что бы все четко работало
+2) [ ] связываем это все с [vk app](https://dev.vk.com/mini-apps/getting-started)
+3) [ ] выпускаем приложение, ставим рекламу
+4) [ ] мы богаты,~~телки, меф,~~ 4 жены
