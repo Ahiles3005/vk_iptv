@@ -1,3 +1,21 @@
+import m3u8Parser from 'm3u8-parser';
+import fs from 'fs';
+
+
+let text = fs.readFileSync('./m3u/playlist.m3u8');
+
+
+console.log(text);
+
+ // let parser = new m3u8Parser.Parser();
+// parser.push(data);
+// parser.end();
+// console.log(parser);
+
+
+
+
+
 export const channelList = {
   header: {
     attrs: {},
