@@ -1,37 +1,44 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import SpatialNavigation, {
   Focusable,
   FocusableSection,
-} from 'react-js-spatial-navigation';
-import Navbar from '../../Components/layout/Navbar/Navbar';
-import Image from '../../Components/commons/Image/Image';
-import { channelList } from '../../Assets/ChannelList';
-import defaultChannelImage from '../../Assets/images/img1.png';
-import placeholderImage from '../../Assets/images/placeholder.png';
-import './Homepage.css';
+} from "react-js-spatial-navigation";
+import Navbar from "../../Components/layout/Navbar/Navbar";
+import Image from "../../Components/commons/Image/Image";
+import { fetchM3U } from "../../Assets/ChannelList";
+import defaultChannelImage from "../../Assets/images/img1.png";
+import placeholderImage from "../../Assets/images/placeholder.png";
+import "./Homepage.css";
 
 const Homepage = () => {
   const navigate = useNavigate();
-  const [channels, setChannels] = useState(channelList.items.slice(0));
+  const [channels, setChannels] = useState([]);
+
+  useEffect(() => {
+    fetchM3U.then((m) => {
+      console.log(m);
+      setChannels(m.medias);
+    });
+  }, [channels]);
 
   useEffect(() => {
     const backEvent = function (e) {
-      if (e.keyName === 'back') {
-        console.log('back event', e, window.location.href);
+      if (e.keyName === "back") {
+        console.log("back event", e, window.location.href);
         window.history.back();
       }
     };
 
     // add eventListener for tizenhwkey (Back Button)
-    window.addEventListener('tizenhwkey', backEvent);
+    window.addEventListener("tizenhwkey", backEvent);
     return () => {
-      window.removeEventListener('tizenhwkey', backEvent);
+      window.removeEventListener("tizenhwkey", backEvent);
     };
   }, []);
 
   const filterHandler = (val) => {
-    console.log('val', val);
+    console.log("val", val);
     const newChannels = channelList.items.filter((item) => {
       return item.raw.includes(val);
     });
@@ -39,65 +46,65 @@ const Homepage = () => {
   };
 
   return (
-    <div className='homepageWrapper'>
+    <div className="homepageWrapper">
       <SpatialNavigation>
         <Navbar filterHandler={filterHandler} />
-        <section className='contentWrapper'>
-          <div className='channelListWrapper'>
-            <ul className='channelList'>
+        <section className="contentWrapper">
+          <div className="channelListWrapper">
+            <ul className="channelList">
               <FocusableSection>
                 <Focusable
                   onClickEnter={() => {
-                    filterHandler('');
+                    filterHandler("");
                   }}
                 >
                   <li
                     onClick={() => {
-                      filterHandler('');
+                      filterHandler("");
                     }}
-                    className='channelListItem'
+                    className="channelListItem"
                   >
                     All
                   </li>
                 </Focusable>
                 <Focusable
                   onClickEnter={() => {
-                    filterHandler('EN');
+                    filterHandler("EN");
                   }}
                 >
                   <li
                     onClick={() => {
-                      filterHandler('EN');
+                      filterHandler("EN");
                     }}
-                    className='channelListItem'
+                    className="channelListItem"
                   >
                     English
                   </li>
                 </Focusable>
                 <Focusable
                   onClickEnter={() => {
-                    filterHandler('China');
+                    filterHandler("China");
                   }}
                 >
                   <li
                     onClick={() => {
-                      filterHandler('China');
+                      filterHandler("China");
                     }}
-                    className='channelListItem'
+                    className="channelListItem"
                   >
                     Chinese
                   </li>
                 </Focusable>
                 <Focusable
                   onClickEnter={() => {
-                    filterHandler('French');
+                    filterHandler("French");
                   }}
                 >
                   <li
                     onClick={() => {
-                      filterHandler('French');
+                      filterHandler("French");
                     }}
-                    className='channelListItem'
+                    className="channelListItem"
                   >
                     French
                   </li>
@@ -105,7 +112,7 @@ const Homepage = () => {
               </FocusableSection>
             </ul>
           </div>
-          <div className='channelsView'>
+          <div className="channelsView">
             {channels?.length ? (
               channels.map((channelItem, index) => {
                 return (
@@ -113,7 +120,7 @@ const Homepage = () => {
                     onClickEnter={() => {
                       navigate(
                         `/channel?channelUrl=${window.encodeURIComponent(
-                          channelItem.url
+                          channelItem.location
                         )}`
                       );
                     }}
@@ -123,17 +130,17 @@ const Homepage = () => {
                       onClick={() => {
                         navigate(
                           `/channel?channelUrl=${window.encodeURIComponent(
-                            channelItem.url
+                            channelItem.location.replace("?fluxustv.m3u8", "")
                           )}`
                         );
                       }}
-                      className='channelItem'
+                      className="channelItem"
                       title={channelItem.url}
                     >
                       <Image
-                        url={channelItem.tvg.logo}
+                        url={channelItem.attributes["tvg-logo"]}
                         altUrl={defaultChannelImage}
-                        alt='channelImage'
+                        alt="channelImage"
                         placeholderImage={placeholderImage}
                       />
                     </span>
@@ -141,7 +148,7 @@ const Homepage = () => {
                 );
               })
             ) : (
-              <div className='noResults'>Sorry, No Results Found!</div>
+              <div className="noResults">Sorry, No Results Found!</div>
             )}
           </div>
         </section>
