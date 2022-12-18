@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from '../../../Assets/images/iptvlogo.png';
-//import { Focusable, FocusableSection } from 'react-js-spatial-navigation';
+import { Focusable, FocusableSection } from 'react-js-spatial-navigation';
 import './Navbar.css';
 
 const Navbar = ({ filterHandler }) => {
