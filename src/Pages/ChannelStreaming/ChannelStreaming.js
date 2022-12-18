@@ -16,11 +16,6 @@ const ChannelStreaming = () => {
       }
     };
 
-    // add eventListener for tizenhwkey (Back Button)
-    window.addEventListener('tizenhwkey', backEvent);
-    return () => {
-      window.removeEventListener('tizenhwkey', backEvent);
-    };
   }, []);
 
   return (
