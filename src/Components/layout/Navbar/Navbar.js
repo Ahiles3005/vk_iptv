@@ -1,18 +1,18 @@
-import React from 'react';
-import logo from '../../../Assets/images/iptvlogo.png';
-import { Focusable, FocusableSection } from 'react-js-spatial-navigation';
-import './Navbar.css';
+import React from "react";
+import logo from "../../../Assets/images/iptvlogo.png";
+import { Focusable, FocusableSection } from "react-js-spatial-navigation";
+import "./Navbar.css";
 
 const Navbar = ({ filterHandler }) => {
   return (
-    <nav className='navbarWrapper'>
-      <span className='logoWrapper'>
-        <img className='logoImage' src={logo} alt='Logo' />
+    <nav className="navbarWrapper">
+      <span className="logoWrapper">
+        <img className="logoImage" src={logo} alt="Logo" />
       </span>
-      <div className='linksAndSearchWrapper'>
-        <div className='searchWrapper'></div>
-        <div className='linksWrapper'>
-          <FocusableSection defaultElement='.tvChannels'>
+      <div className="linksAndSearchWrapper">
+        <div className="searchWrapper"></div>
+        <div className="linksWrapper">
+          <div>
             {/*<Focusable*/}
             {/*  onClickEnter={() => {*/}
             {/*    filterHandler('movie');*/}
@@ -30,7 +30,7 @@ const Navbar = ({ filterHandler }) => {
             {/*    Movies*/}
             {/*  </div>*/}
             {/*</Focusable>*/}
-          </FocusableSection>
+          </div>
         </div>
       </div>
     </nav>
