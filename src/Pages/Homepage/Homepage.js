@@ -39,7 +39,7 @@ const Homepage = () => {
     let newChannels = originalChannels;
     if (val !== "all") {
       newChannels = originalChannels.filter((chanel) => {
-        return chanel.group.title === val;
+        return chanel.tvg.country === val;
       });
     }
     setChannels(newChannels);
